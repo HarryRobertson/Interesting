@@ -6,7 +6,7 @@ namespace Interesting.Framework.Tests
 {
     public class PluginLoaderTests
     {
-        private const string SimplePlugin = "<Plugin name=\"Simple\" plugin=\"Interesting.Framework.Tests.Plugins.SimplePlugin\" source=\"Interesting.Framework.Tests.dll\" />";
+        private const string SimplePlugin = "<Application><Plugin name=\"Simple\" plugin=\"Interesting.Framework.Tests.Plugins.SimplePlugin\" source=\"Interesting.Framework.Tests.dll\" /></Application>";
 
         [Fact]
         public void LoadMethod_PassedSimplePluginConfig_LoadsSimplePluginWithCorrectName()

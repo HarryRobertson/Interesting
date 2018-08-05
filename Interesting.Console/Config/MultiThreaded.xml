@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Application>
+  <Executable name="MultiThreaded" plugin="Interesting.Plugins.MultiThreaded" source="Interesting.Plugins.dll">
+    <Executable name="Animation" plugin="Interesting.Plugins.Animation" source="Interesting.Plugins.dll"/>
+    <Executable name="Interactive" plugin="Interesting.Plugins.Interactive" source="Interesting.Plugins.dll" >
+      <Datasource name="Interrogator" plugin="Interesting.Plugins.Interrogator" source="Interesting.Plugins.dll" />
+      <Datasink name="Notifier" plugin="Interesting.Plugins.Notifier" source="Interesting.Plugins.dll" />
+    </Executable>
+  </Executable>
+</Application>
