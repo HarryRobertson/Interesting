@@ -11,7 +11,7 @@ namespace Interesting.Framework
     {
         public static IEnumerable<IPlugin> Load(XDocument config)
         {
-            foreach (XElement pluginConfig in config.Elements())
+            foreach (XElement pluginConfig in config.Root.Elements())
             {
                 string name = pluginConfig.Attribute(XName.Get("name"))?.Value;
                 string plugin = pluginConfig.Attribute(XName.Get("plugin"))?.Value;
@@ -33,12 +33,30 @@ namespace Interesting.Framework
 
                 IPlugin p = (IPlugin) Activator.CreateInstance(type);
 
-                if (pluginConfig.Name == "Executable" && !(p is IExecutable)) 
-                    throw  new ConfigurationErrorsException("The plugin loaded was not of the type defined.");
+                if (!ValidatePlugin(pluginConfig.Name, p)) 
+                    throw  new ConfigurationErrorsException($"The plugin loaded was not of the type defined (Definition={pluginConfig.Name}, Loaded={p.Name}.");
 
                 p.Configure(new XDocument(pluginConfig));
                 yield return p;
             }
+        }
+
+        private static bool ValidatePlugin(XName name, IPlugin plugin)
+        {
+            bool @return = true;
+            switch (name.ToString())
+            {
+                case "Executable":
+                    if (!(plugin is IExecutable)) @return = false;
+                    break;
+                case "Datasource":
+                    if (!(plugin is IDatasource)) @return = false;
+                    break;
+                case "Datasink":
+                    if (!(plugin is IDatasink)) @return = false;
+                    break;
+            }
+            return @return;
         }
     }
 }

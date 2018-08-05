@@ -1,4 +1,5 @@
-﻿using System.Xml.Linq;
+﻿using System;
+using System.Xml.Linq;
 
 namespace Interesting.Framework
 {
@@ -11,5 +12,22 @@ namespace Interesting.Framework
     public interface IExecutable
     {
         void Execute();
+    }
+
+    public interface IDatasource
+    {
+        IUser Read();
+    }
+
+    public interface IDatasink
+    {
+        void Write(IUser user);
+    }
+
+    public interface IUser
+    {
+        string FirstName { get; }
+        string LastName { get; }
+        TimeSpan Age { get; }
     }
 }

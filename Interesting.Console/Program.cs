@@ -13,7 +13,7 @@ namespace Interesting.Console
         {
             string pluginName = args[0];
             string configPath = ConfigurationManager.AppSettings.Get("configPath");
-            string config = Directory.EnumerateFiles(configPath).First(f => f.EndsWith(pluginName) || f.EndsWith($"{pluginName}.xml") );
+            string config = Directory.EnumerateFiles(configPath).First(f => f.EndsWith(pluginName) || f.EndsWith($"{pluginName}.xml"));
 
             IEnumerable<IPlugin> plugins = PluginLoader.Load(XDocument.Load(new FileStream(config, FileMode.Open)));
             foreach (IPlugin plugin in plugins)
@@ -21,6 +21,9 @@ namespace Interesting.Console
                 if (plugin is IExecutable console)
                     console.Execute();
             }
+#if  DEBUG
+            System.Console.ReadKey();
+#endif
         }
     }
 }

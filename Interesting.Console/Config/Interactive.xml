@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Application>
+  <Executable name="Interactive" plugin="Interesting.Plugins.Interactive" source="Interesting.Plugins.dll" >
+    <Datasource name="Interrogator" plugin="Interesting.Plugins.Interrogator" source="Interesting.Plugins.dll" />
+    <Datasink name="Responder" plugin="Interesting.Plugins.Responder" source="Interesting.Plugins.dll">
+      <DistancePerYear>940</DistancePerYear>
+      <DaysPerYear>365.25</DaysPerYear>
+    </Datasink>
+  </Executable>
+</Application>
