@@ -1,0 +1,2 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Executable name="HelloWorld" plugin="Interesting.Plugins.HelloWorld" source="Interesting.Plugins.dll"/>

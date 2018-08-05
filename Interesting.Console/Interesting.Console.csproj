@@ -18,4 +18,10 @@
     <ProjectReference Include="..\Interesting.Framework\Interesting.Framework.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Config\HelloWorld.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

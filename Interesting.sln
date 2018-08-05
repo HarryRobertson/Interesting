@@ -9,6 +9,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interesting.Plugins", "Inte
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interesting.Framework", "Interesting.Framework\Interesting.Framework.csproj", "{861716D3-CFFA-4507-9F72-68AB40B75F12}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{DE8BA5D5-F363-4899-9A3C-6DD607715E0A}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interesting.Framework.Tests", "Interesting.Framework.Tests\Interesting.Framework.Tests.csproj", "{83109206-09C1-41D2-9DC3-6AD729F25A67}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +34,10 @@ Global
 		{861716D3-CFFA-4507-9F72-68AB40B75F12}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{861716D3-CFFA-4507-9F72-68AB40B75F12}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{861716D3-CFFA-4507-9F72-68AB40B75F12}.Release|Any CPU.Build.0 = Release|Any CPU
+		{83109206-09C1-41D2-9DC3-6AD729F25A67}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{83109206-09C1-41D2-9DC3-6AD729F25A67}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{83109206-09C1-41D2-9DC3-6AD729F25A67}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{83109206-09C1-41D2-9DC3-6AD729F25A67}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,18 +1,19 @@
 ﻿using System;
+using System.Xml.Linq;
 using Interesting.Framework;
 
 namespace Interesting.Plugins
 {
-    class HelloWorld : IPlugin, IConsole
+    class HelloWorld : IPlugin, IExecutable
     {
-        public string Name => GetType().Name;
+        public string Name { get; private set; }
 
-        public void Configure(object variant)
+        public void Configure(XDocument config)
         {
-            throw new NotImplementedException();
+            Name = config.Root?.Attribute(XName.Get("name"))?.Value;
         }
 
-        public void Execute(string[] args)
+        public void Execute()
         {
             Console.WriteLine("Hello world!");
 #if DEBUG

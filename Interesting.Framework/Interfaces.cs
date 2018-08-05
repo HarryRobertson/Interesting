@@ -1,13 +1,15 @@
-﻿namespace Interesting.Framework
+﻿using System.Xml.Linq;
+
+namespace Interesting.Framework
 {
     public interface IPlugin
     {
         string Name {get;}
-        void Configure(object variant);
+        void Configure(XDocument config);
     }
 
-    public interface IConsole
+    public interface IExecutable
     {
-        void Execute(string[] args);
+        void Execute();
     }
 }

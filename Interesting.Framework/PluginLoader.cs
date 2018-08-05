@@ -3,41 +3,42 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
 using System.Reflection;
-using System.Xml;
+using System.Xml.Linq;
 
 namespace Interesting.Framework
 {
-    public class PluginLoader : IConfigurationSectionHandler
+    public static class PluginLoader 
     {
-        private const string TYPE_ATTRIBUTE = "type";
-
-        public object Create(object parent, object configContext, XmlNode section)
+        public static IEnumerable<IPlugin> Load(XDocument config)
         {
-            List<IPlugin> plugins = new List<IPlugin>();
-            foreach (XmlNode node in section.ChildNodes)
+            foreach (XElement pluginConfig in config.Elements())
             {
-                try
-                {
-                    string typeName = node?.Attributes?[TYPE_ATTRIBUTE]?.Value;
-                    if (typeName == null) continue;
+                string name = pluginConfig.Attribute(XName.Get("name"))?.Value;
+                string plugin = pluginConfig.Attribute(XName.Get("plugin"))?.Value;
+                string source = pluginConfig.Attribute(XName.Get("source"))?.Value;
+                if (name == null || plugin == null || source == null)
+                    throw new ConfigurationErrorsException("Plugin definition must include a name, plugin and source.");
 
-                    string className = typeName.Split(',')[0]?.Trim();
-                    string assemblyName = typeName.Split(',')[1]?.Trim();
-                    if (className == null || assemblyName == null) continue;
-
-                    Assembly assembly = Assembly.LoadFrom(assemblyName);
-                    Type type = assembly.GetType(className);
-                    if (type == null) continue;
-
-                    IPlugin plugin = (IPlugin) Activator.CreateInstance(type);
-                    plugins.Add(plugin);
+                Type type;
+                try { 
+                    Assembly assembly = Assembly.LoadFrom(source);
+                    type = assembly.GetType(plugin);
+                    if (type == null)
+                        throw new ConfigurationErrorsException("The plugin definition was not valid.");
                 }
-                catch (FileNotFoundException e) 
+                catch (FileNotFoundException e)
                 {
-                    // just continue, might need better handling later
+                    throw new ConfigurationErrorsException("The plugin definition was not valid.", e);
                 }
+
+                IPlugin p = (IPlugin) Activator.CreateInstance(type);
+
+                if (pluginConfig.Name == "Executable" && !(p is IExecutable)) 
+                    throw  new ConfigurationErrorsException("The plugin loaded was not of the type defined.");
+
+                p.Configure(new XDocument(pluginConfig));
+                yield return p;
             }
-            return plugins;
         }
     }
 }
