@@ -7,8 +7,12 @@ using System.Xml.Linq;
 
 namespace Interesting.Framework
 {
-    public static class PluginLoader 
+    public static class PluginLoader // might be able to abstract this and make it configurable too
     {
+        /*
+         * I'm using XDocument here for simplicity, but given more time I'd like to implement a custom config handler
+         * that wraps XDocument to avoid some verbosity. This will be simpler now that I've formalised the config format.
+         */
         public static IEnumerable<IPlugin> Load(XDocument config)
         {
             foreach (XElement pluginConfig in config.Root.Elements())

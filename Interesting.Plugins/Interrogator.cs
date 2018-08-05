@@ -10,7 +10,7 @@ namespace Interesting.Plugins
         {
             User user = new User();
             Console.Write("Please enter your full name: ");
-            string[] fullName = Console.ReadLine()?.Split(' '); // so many things that could go wrong here...
+            string[] fullName = Console.ReadLine()?.Trim().Split(' '); // so many things that could go wrong here...
             user.FirstName = fullName?.First();
             user.LastName = fullName?.Last();
             Console.Write("Please enter your date of birth: ");

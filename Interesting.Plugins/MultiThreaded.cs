@@ -7,7 +7,7 @@ using Interesting.Framework;
 
 namespace Interesting.Plugins
 {
-    class MultiThreaded : AbstractPlugin, IExecutable // this plugin really needs a better name that isn't so context dependent
+    class MultiThreaded : AbstractPlugin, IExecutable 
     {
         private IEnumerable<IExecutable> _threads;
 
@@ -19,7 +19,7 @@ namespace Interesting.Plugins
             XDocument dependencyConfig = new XDocument(xElements);
             IEnumerable<IPlugin> threads = PluginLoader.Load(dependencyConfig).ToArray(); // force immediate execution
             if (threads.Any(p => !(p is IExecutable)))
-                throw new ConfigurationErrorsException("All sub-plugins must be IExecutable");
+                throw new ConfigurationErrorsException("All sub-plugins must implement IExecutable.");
 
             _threads = threads.Cast<IExecutable>();
         }
